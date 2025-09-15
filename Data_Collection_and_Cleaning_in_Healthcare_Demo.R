@@ -87,3 +87,16 @@ sum(duplicated(df_clean))
 nrow(df)       # total rows before cleaning
 nrow(df_clean) # total rows after removing duplicates
 
+# ====================================
+# Detecting Outliers
+# ====================================
+# Detect outliers using IQR
+Q1 <- quantile(df$bmi, 0.25, na.rm = TRUE)
+Q3 <- quantile(df$bmi, 0.75, na.rm = TRUE)
+IQR <- Q3 - Q1
+outliers <- df$bmi[df$bmi < (Q1 - 1.5*IQR) | df$bmi > (Q3 + 1.5*IQR)]
+outliers
+
+# Boxplot to visualize
+boxplot(df$bmi, main = "Boxplot of BMI", ylab = "BMI")
+
